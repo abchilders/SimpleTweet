@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     Context context;
     List<Tweet> tweets;
 
-    public TweetsAdapter(Context context) {
+    public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
         this.tweets = tweets;
     }
@@ -47,6 +48,18 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         return tweets.size();
     }
 
+    // Clean all elements of the recycler
+    public void clear() {
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> tweetList) {
+        tweets.addAll(tweetList);
+        notifyDataSetChanged();
+    }
+
     // Define a viewholder, which holds a single row/item in RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -62,8 +75,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
         }
 
+        // take attributes from tweet and populate member variables
         public void bind(Tweet tweet) {
-            // LEFT OFF HERE AT 7:43
+            tvBody.setText(tweet.body);
+            tvScreenName.setText(tweet.user.screenName);
+            // load image from image URL using Glide
+            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
         }
     }
 }
