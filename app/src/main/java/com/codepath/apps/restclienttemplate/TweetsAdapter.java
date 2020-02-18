@@ -66,6 +66,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
+        TextView tvTimestamp;
 
         // "itemView" represents one row in RecyclerView (i.e. one Tweet)
         public ViewHolder(@NonNull View itemView) {
@@ -73,12 +74,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
         }
 
         // take attributes from tweet and populate member variables
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
+            // convert timestamp of tweet into relative timestamp (e.g. 5m, 1d)
+            tvTimestamp.setText(TimeFormatter.getTimeDifference(tweet.createdAt));
             // load image from image URL using Glide
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
         }
