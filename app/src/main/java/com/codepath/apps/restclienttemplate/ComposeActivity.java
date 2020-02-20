@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import okhttp3.Headers;
 
@@ -55,7 +57,7 @@ public class ComposeActivity extends AppCompatActivity {
                     Toast.makeText(ComposeActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(ComposeActivity.this, tweetContent, Toast.LENGTH_LONG).show();
+                Toast.makeText(ComposeActivity.this, "Tweet sent", Toast.LENGTH_SHORT).show();
                 // Make an API call to Twitter to publish the tweet
                 client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
                     @Override
@@ -65,6 +67,13 @@ public class ComposeActivity extends AppCompatActivity {
                         try {
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
                             Log.i(TAG, "Published tweet says: " + tweet);
+                            Intent intent = new Intent();
+                            // put parceled Tweet into intent
+                            intent.putExtra("tweet", Parcels.wrap(tweet));
+                            // Set result code and bundle data for response
+                            setResult(RESULT_OK, intent);
+                            // Closes the activity, pass data to parent
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
