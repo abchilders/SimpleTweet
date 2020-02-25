@@ -8,12 +8,12 @@ Time spent: **13** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] User can **compose and post a new tweet**
+- [x] User can **compose and post a new tweet**
   - [x] User can click a “Compose” icon in the Action Bar on the top right
   - [x] User can then enter a new tweet and post this to twitter
   - [x] User is taken back to home timeline with **new tweet visible** in timeline
   - [x] Newly created tweet should be manually inserted into the timeline and not rely on a full refresh
-  - [ ] User can **see a counter with total number of characters left for tweet** on compose tweet page
+  - [x] User can **see a counter with total number of characters left for tweet** on compose tweet page
 
 The following **optional** features are implemented:
 
@@ -49,7 +49,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Figuring out how to change the color of the toolbar was deceptively tricky at first, but once I figured out how to use colors.xml and other XML files, the process became simple and I was able to teach it to others! 
 
 ## Open-source libraries used
 
